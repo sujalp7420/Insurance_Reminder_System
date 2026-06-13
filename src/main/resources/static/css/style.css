@@ -1,0 +1,42 @@
+body{
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b);
+    color:white;
+}
+
+.card{
+    border:none;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.btn-primary{
+    background:linear-gradient(
+        45deg,
+        #2563eb,
+        #06b6d4);
+    border:none;
+    border-radius:12px;
+}
+
+.table{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.sidebar{
+    background:#020617;
+}
+
+.nav-link:hover{
+    background:#2563eb;
+    border-radius:10px;
+}

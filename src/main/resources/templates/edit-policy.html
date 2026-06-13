@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Policy</title>
+</head>
+<body>
+
+<h2>Edit Policy</h2>
+
+<form th:action="@{'/policies/update/' + ${policy.id}}"
+      method="post">
+
+    <input type="text"
+           name="customerName"
+           th:value="${policy.customerName}">
+
+    <input type="email"
+           name="customerEmail"
+           th:value="${policy.customerEmail}">
+
+    <input type="text"
+           name="customerMobile"
+           th:value="${policy.customerMobile}">
+
+    <input type="text"
+           name="companyName"
+           th:value="${policy.companyName}">
+
+    <input type="text"
+           name="policyNumber"
+           th:value="${policy.policyNumber}">
+
+    <button type="submit">
+        Update Policy
+    </button>
+
+</form>
+
+</body>
+</html>
