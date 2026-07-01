@@ -43,8 +43,11 @@ public class PolicyServiceImpl implements PolicyService {
                 .expiryDate(request.getExpiryDate())
                 .premiumAmount(request.getPremiumAmount())
                 .notes(request.getNotes())
-                .status(PolicyStatus.ACTIVE)
-                .build();
+                .status(
+                        request.getExpiryDate().isBefore(java.time.LocalDate.now())
+                                ? PolicyStatus.EXPIRED
+                                : PolicyStatus.ACTIVE
+                )                .build();
 
         return policyRepository.save(policy);
     }
@@ -52,8 +55,21 @@ public class PolicyServiceImpl implements PolicyService {
     @Override
     public List<Policy> getAllPolicies() {
 
-        return policyRepository.findByAgent(
-                agentService.getLoggedInAgent());
+        List<Policy> policies =
+                policyRepository.findByAgent(
+                        agentService.getLoggedInAgent());
+
+        for (Policy policy : policies) {
+
+            if (policy.getExpiryDate().isBefore(java.time.LocalDate.now())
+                    && policy.getStatus() != PolicyStatus.EXPIRED) {
+
+                policy.setStatus(PolicyStatus.EXPIRED);
+                policyRepository.save(policy);
+            }
+        }
+
+        return policies;
     }
 
     @Override
